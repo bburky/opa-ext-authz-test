@@ -1,0 +1,55 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway
+spec:
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: everything
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - my-gateway
+  http:
+    - name: "opa-v1"
+      match:
+        - uri:
+            prefix: /podinfo/
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: podinfo.podinfo.svc.cluster.local
+            port:
+              number: 9898
+    - name: "httpbin"
+      match:
+        - uri:
+            prefix: /httpbin/
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: httpbin.httpbin.svc.cluster.local
+    # For debugging
+    - name: "opa"
+      match:
+        - uri:
+            prefix: /opa/
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: opa.opa.svc.cluster.local
+            port:
+              number: 8181

@@ -1,0 +1,7 @@
+bases:
+- httpbin/
+- opa/
+- podinfo/
+
+resources:
+- networking.yaml

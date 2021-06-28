@@ -1,0 +1,16 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: httpbin-opa
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+  action: CUSTOM
+  provider:
+    name: "opa"
+  rules:
+  - to:
+    - operation:
+        # Send all request through the CUSTOM provider except this path
+        notPaths: ["/ip"]

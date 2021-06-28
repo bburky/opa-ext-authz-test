@@ -1,0 +1,40 @@
+example:
+  jwt:
+    # JWT signing key
+    secret: "secret"
+
+  # TODO: not currently used
+  jwks_jwt:
+    # JWKS URL for validating JWTs
+    jwks_url: "https://example.com/jwks"
+
+  apps:
+    example_app:
+      # Enable OPA policies for app
+      enabled: false # Do not enable this example app
+      # TODO: Matched against JWT "aud" claim
+      jwt_audience: 'invalid'
+      # List of glob patterns matched against destination Istio principals.
+      # Must match the service account(s) running the app.
+      principals:
+        - "spiffe://cluster.local/ns/example/**"
+        - "spiffe://cluster.local/ns/example-2/**"
+        - "spiffe://cluster.local/ns/example/sa/*"
+        - "spiffe://cluster.local/ns/example/sa/default"
+
+    httpbin:
+      enabled: true
+      jwt_audience: 'todo'
+      principals:
+        - "spiffe://cluster.local/ns/httpbin/sa/httpbin"
+
+    podinfo:
+      enabled: true
+      jwt_audience: 'todo'
+      principals:
+        - "spiffe://cluster.local/ns/podinfo/sa/*"
+      # Some config data for rewriting Authorization headers.
+      # Authorized requests will have these basic auth creds injected.
+      credentials:
+        username: user
+        password: hunter2

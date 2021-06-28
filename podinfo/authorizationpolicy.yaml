@@ -1,0 +1,31 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: podinfo-opa
+spec:
+  selector:
+    matchLabels:
+      app: podinfo
+  action: CUSTOM
+  provider:
+    name: "opa"
+  rules:
+  - to:
+    - operation:
+        # Send all paths through the CUSTOM provider
+        paths: ["*"]
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: podinfo-authz
+spec:
+  selector:
+    matchLabels:
+      app: podinfo
+  action: ALLOW
+  rules:
+  - to:
+    - operation:
+        # _After_ validating it, additionally apply Istio AuthZ to restrict to this path:
+        paths: ["/headers"]
