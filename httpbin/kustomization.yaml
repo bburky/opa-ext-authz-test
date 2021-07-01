@@ -1,8 +1,8 @@
 namespace: httpbin
 
 bases:
-- https://raw.githubusercontent.com/istio/istio/release-1.10/samples/httpbin/httpbin.yaml
+  - https://raw.githubusercontent.com/istio/istio/release-1.10/samples/httpbin/httpbin.yaml
 
 resources:
-- authorizationpolicy.yaml
-- namespace.yaml
+  - authorizationpolicy.yaml
+  - namespace.yaml

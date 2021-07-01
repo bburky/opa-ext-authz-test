@@ -1,8 +1,8 @@
 namespace: podinfo
 
 bases:
-- github.com/stefanprodan/podinfo/kustomize
+  - github.com/stefanprodan/podinfo/kustomize
 
 resources:
-- authorizationpolicy.yaml
-- namespace.yaml
+  - authorizationpolicy.yaml
+  - namespace.yaml

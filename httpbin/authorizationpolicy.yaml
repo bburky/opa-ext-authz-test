@@ -10,7 +10,7 @@ spec:
   provider:
     name: "opa"
   rules:
-  - to:
-    - operation:
-        # Send all request through the CUSTOM provider except this path
-        notPaths: ["/ip"]
+    - to:
+        - operation:
+            # Send all request through the CUSTOM provider except this path
+            notPaths: ["/ip"]

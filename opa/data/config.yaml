@@ -13,7 +13,7 @@ example:
       # Enable OPA policies for app
       enabled: false # Do not enable this example app
       # TODO: Matched against JWT "aud" claim
-      jwt_audience: 'invalid'
+      jwt_audience: "invalid"
       # List of glob patterns matched against destination Istio principals.
       # Must match the service account(s) running the app.
       principals:
@@ -24,13 +24,13 @@ example:
 
     httpbin:
       enabled: true
-      jwt_audience: 'todo'
+      jwt_audience: "todo"
       principals:
         - "spiffe://cluster.local/ns/httpbin/sa/httpbin"
 
     podinfo:
       enabled: true
-      jwt_audience: 'todo'
+      jwt_audience: "todo"
       principals:
         - "spiffe://cluster.local/ns/podinfo/sa/*"
       # Some config data for rewriting Authorization headers.

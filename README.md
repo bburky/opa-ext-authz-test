@@ -21,10 +21,10 @@ Tested with Istio 1.10.1 and OPA `0.29.1-envoy`.
 
 **NOTE: OPA is configured without any authentication in this example.**
 
-* Centralized OPA instance with modular policy structure allowing different policy for each app
-  * Policy is selected based on destination Istio `principal` (SPIFFE URL including namespace and service account)
-* JWT static secret validation
-* JWT validation using JWKS HTTP endpoint
+- Centralized OPA instance with modular policy structure allowing different policy for each app
+  - Policy is selected based on destination Istio `principal` (SPIFFE URL including namespace and service account)
+- JWT static secret validation
+- JWT validation using JWKS HTTP endpoint
 
 ## Header manipulation
 
@@ -34,7 +34,7 @@ Hypothetically, OPA could accept a JWT and swap out credentials something else b
 
 ## See also
 
-* https://istio.io/latest/blog/2021/better-external-authz/
-* https://istio.io/latest/docs/tasks/security/authorization/authz-custom/
-* https://istio.io/latest/docs/reference/config/security/authorization-policy/
-* https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto
+- https://istio.io/latest/blog/2021/better-external-authz/
+- https://istio.io/latest/docs/tasks/security/authorization/authz-custom/
+- https://istio.io/latest/docs/reference/config/security/authorization-policy/
+- https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto

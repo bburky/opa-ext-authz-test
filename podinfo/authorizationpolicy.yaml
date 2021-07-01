@@ -10,10 +10,10 @@ spec:
   provider:
     name: "opa"
   rules:
-  - to:
-    - operation:
-        # Send all paths through the CUSTOM provider
-        paths: ["*"]
+    - to:
+        - operation:
+            # Send all paths through the CUSTOM provider
+            paths: ["*"]
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
@@ -25,7 +25,7 @@ spec:
       app: podinfo
   action: ALLOW
   rules:
-  - to:
-    - operation:
-        # _After_ validating it, additionally apply Istio AuthZ to restrict to this path:
-        paths: ["/headers"]
+    - to:
+        - operation:
+            # _After_ validating it, additionally apply Istio AuthZ to restrict to this path:
+            paths: ["/headers"]

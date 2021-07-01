@@ -5,8 +5,8 @@ metadata:
   name: istiocontrolplane
 spec:
   meshConfig:
-   extensionProviders:
-    - name: "opa"
-      envoyExtAuthzGrpc:
-        service: "opa.opa.svc.cluster.local"
-        port: "9191"
+    extensionProviders:
+      - name: "opa"
+        envoyExtAuthzGrpc:
+          service: "opa.opa.svc.cluster.local"
+          port: "9191"
