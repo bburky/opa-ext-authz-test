@@ -45,6 +45,9 @@ spec:
             - readOnly: true
               mountPath: /data
               name: opa-data
+          envFrom:
+            - configMapRef:
+                name: opa-secrets
           args:
             - "run"
             - "--server"
@@ -77,5 +80,5 @@ spec:
           configMap:
             name: opa-policy
         - name: opa-data
-          secret:
-            secretName: opa-data
+          configMap:
+            name: opa-data

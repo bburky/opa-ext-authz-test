@@ -4,23 +4,19 @@ configMapGenerator:
   # The OPA policy
   - name: opa-policy
     files:
+      - policy/credentials.rego
       - policy/envoy_authz.rego
       - policy/static_secret_jwt.rego
       - policy/apps/httpbin.rego
       - policy/apps/podinfo.rego
-  # The `opa run` doesn't yet support --schema, it will soon?
-  # https://github.com/open-policy-agent/opa/issues/3341
-  - name: opa-schemas
-    files:
-      # Validate input against an envoy schema
-      - https://raw.githubusercontent.com/aavarghese/opa-schema-examples/ruleAnnotation/envoy/schemas/input.json
-    # An additional schema can validate the config data
-    # - TODO:
-
-secretGenerator:
   - name: opa-data
     files:
       - data/config.yaml
+
+secretGenerator:
+  - name: opa-secrets
+    envs:
+      - secrets/secrets.env
 
 resources:
   - opa.yaml

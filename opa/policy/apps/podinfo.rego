@@ -1,7 +1,7 @@
 package example.apps.podinfo
 
 import data.example.jwt
-import data.example.apps.podinfo.credentials
+import data.example.credentials
 import input.attributes.request.http as http_request
 
 default allow = {
@@ -31,6 +31,8 @@ allow = response {
 }
 
 encoded_credentials = authorization {
-    encoded := base64.encode(concat(":", [credentials.username, credentials.password]))
+    username := credentials.app_credential("podinfo", "username")
+    password := credentials.app_credential("podinfo", "password")
+    encoded := base64.encode(concat(":", [username, password]))
     authorization := concat(" ", ["Basic", encoded])
 }

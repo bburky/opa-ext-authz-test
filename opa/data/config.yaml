@@ -33,8 +33,6 @@ example:
       jwt_audience: "todo"
       principals:
         - "spiffe://cluster.local/ns/podinfo/sa/*"
-      # Some config data for rewriting Authorization headers.
+      # Some config data is in environment variables (from the
+      # secrets/secrets.env file) for rewriting Authorization headers.
       # Authorized requests will have these basic auth creds injected.
-      credentials:
-        username: user
-        password: hunter2
