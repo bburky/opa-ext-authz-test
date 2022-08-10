@@ -30,7 +30,23 @@ Tested with Istio 1.10.1 and OPA `0.29.1-envoy`.
 
 See `plugins["envoy_ext_authz_grpc"].path` docs at: https://www.openpolicyagent.org/docs/latest/envoy-introduction/ for the syntax on the `allow { ... }` rules. If the response is an object with a `headers` value, they will be sent upstream when `allowed: true`. This allows replacing an `authorization` header (or any other header) before sending it upstream. It is not possible to remove the `Authorization` header with the fields that opa-envoy-plugin provides (`allowed_upstream_headers` from ext_authz can't be configured with opa-envoy-plugin).
 
-Hypothetically, OPA could accept a JWT and swap out credentials something else before sending them onto an upstream application.
+It is possible for OPA to accept a JWT, enforce poicy and then swap the credentials for something else before sending them onto an upstream application. This allows putting complex policy validation in front of an application that may not even JWTs at all.  The one risk to avoid is that the upstream application MUST NOT ever send the final credentials back to the downstream user.
+
+```mermaid
+sequenceDiagram
+    Client->>App Sidecar: JWT
+    activate App Sidecar
+    Note over App Sidecar, OPA-Envoy: OPA External Authorization (ext_authz)
+    activate App Sidecar
+    App Sidecar->>+OPA-Envoy: JWT
+    OPA-Envoy->>-App Sidecar: App service account credentials
+    deactivate App Sidecar
+    App Sidecar->>+App API: App service account credentials
+    App API->>-Client: API response
+    deactivate App Sidecar
+```
+
+
 
 ## See also
 
